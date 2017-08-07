@@ -1,7 +1,7 @@
 {
-  "name": "@unction/template",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@unction/mergeright",
+  "version": "1.0.3",
+  "description": "Merges two iterables, preferring right",
   "keywords": [
     "unction",
     "functional"
@@ -45,6 +45,9 @@
     "tap": "10.3.3"
   },
   "dependencies": {
+    "@unction/isiterable": "*",
+    "@unction/type": "*",
+    "xstream": "10.9.0",
     "ramda": "0.24.1"
   }
 }
