@@ -1,7 +1,7 @@
 /* eslint-disable flowtype/require-parameter-type, flowtype/require-return-type */
 import {test} from "tap"
 
-import mergeLeft from "./source"
+import mergeRight from "./source"
 
 test(({same, end}) => {
   const left = {
