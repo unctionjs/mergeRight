@@ -7,7 +7,7 @@
 
 > IterableType -> IterableType -> IterableType
 
-mergeRights two iterables.
+Merges two iterables, preferring right.
 
 ``` javascript
 const left = {

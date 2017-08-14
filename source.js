@@ -1,55 +1,30 @@
+/* eslint-disable no-extra-parens */
 import type from "@unction/type"
-import isIterable from "@unction/isiterable"
+import key from "@unction/key"
 import xstream from "xstream"
 
-export default function mergeRight (left: IterableType): Function {
-  if (!isIterable(left)) {
-    throw new Error("left is not an iterable")
-  }
+const mapping = {
+  Array: (left: ArrayType): Function => (right: ArrayType): ArrayType => [
+    ...left,
+    ...right,
+  ],
+  Object: (left: ObjectType): Function => (right: ObjectType): ObjectType => ({
+    ...left,
+    ...right,
+  }),
+  // "Map": (left): Function => (right) => new Error("I have no idea how to merge a Map"),
+  // "WeakMap": (left): Function => (right) => new Error("I have no idea how to merge a WeakMap"),
+  // "Set": (left) => (right): Function => new Error("I have no idea how to merge a Set"),
+  // "WeakSet": (left): Function => (right) => new Error("I have no idea how to merge a WeakSet"),
+  String: (left: string): Function => (right: string): string => `${right}${left}`,
+  // "Buffer": (left): Function => (right) => new Error("I have no idea how to merge a Buffer"),
+  Stream: (left: StreamType): Function => (right: StreamType): StreamType => xstream.merge(left, right),
+}
 
+export default function mergeRight (left: IterableType): Function {
   const leftType = type(left)
 
   return function mergeRightLeft (right: IterableType): IterableType {
-    if (!isIterable(right)) {
-      throw new Error("right was not an iterable")
-    }
-
-    if (left.constructor.name !== right.constructor.name) {
-      throw new Error("left and right weren't the same type")
-    }
-
-    switch (leftType) {
-      case "Array": {
-        return [
-          ...left,
-          ...right,
-        ]
-      }
-      case "Object": {
-        return {
-          ...left,
-          ...right,
-        }
-      }
-      case "Map": {
-        return new Map()
-      }
-      case "WeakMap": {
-        return new WeakMap()
-      }
-      case "Set": {
-        return new Set()
-      }
-      case "WeakSet": {
-        return new WeakSet()
-      }
-      case "Stream": {
-        return xstream.merge(left, right)
-      }
-
-      default: {
-        throw new Error(`left wasn't an iterable type we know how to merge: ${leftType}`)
-      }
-    }
+    return key(leftType)(mapping)(left)(right)
   }
 }
