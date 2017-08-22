@@ -14,9 +14,9 @@
     }
   ],
   "license": "ISC",
-  "homepage": "https://github.com/unctionjs/tempLate#readme",
-  "repository": "github:unctionjs/tempLate",
-  "bugs": "https://github.com/unctionjs/tempLate/issues",
+  "homepage": "https://github.com/unctionjs/mergeRight#readme",
+  "repository": "github:unctionjs/mergeRight",
+  "bugs": "https://github.com/unctionjs/mergeRight/issues",
   "main": "transpiled/source.js",
   "nyc": {
     "require": [
