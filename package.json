@@ -58,7 +58,6 @@
   "dependencies": {
     "@unction/key": "1.0.1",
     "@unction/type": "1.0.3",
-    "tape": "4.8.0",
     "xstream": "10.9.0"
   }
 }
