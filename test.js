@@ -1,5 +1,7 @@
-/* eslint-disable flowtype/require-parameter-type, flowtype/require-return-type */
+/* eslint-disable flowtype/require-parameter-type, flowtype/require-return-type, no-magic-numbers */
 import {test} from "tap"
+import xstream from "xstream"
+import streamSatisfies from "@unction/streamsatisfies"
 
 import mergeRight from "./source"
 
@@ -44,4 +46,35 @@ test(({same, end}) => {
   )
 
   end()
+})
+
+test(({same, end}) => {
+  const left = "ab"
+  const right = "c"
+
+  same(
+    mergeRight(left)(right),
+    "cab"
+  )
+
+  end()
+})
+
+test(({equal, end}) => {
+  const left = xstream.of("a")
+  const right = xstream.of("b")
+
+  streamSatisfies(
+    "b---a---|"
+  )(
+    (given) => (expected) => equal(given, expected)
+  )(
+    ({length}) =>
+      (position) => {
+        equal(length, position)
+        end()
+      }
+  )(
+    mergeRight(left)(right)
+  )
 })
