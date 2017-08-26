@@ -18,7 +18,7 @@ const mapping = {
   // "WeakSet": (left): Function => (right) => new Error("I have no idea how to merge a WeakSet"),
   String: (left: string): Function => (right: string): string => `${right}${left}`,
   // "Buffer": (left): Function => (right) => new Error("I have no idea how to merge a Buffer"),
-  Stream: (left: StreamType): Function => (right: StreamType): StreamType => xstream.merge(left, right),
+  Stream: (left: StreamType): Function => (right: StreamType): StreamType => xstream.merge(right, left),
 }
 
 export default function mergeRight (left: IterableType): Function {
