@@ -3,7 +3,7 @@ import {test} from "tap"
 import xstream from "xstream"
 import streamSatisfies from "@unction/streamsatisfies"
 
-import mergeRight from "./"
+import mergeRight from "./index"
 
 test(({same, end}) => {
   const left = {
