@@ -30,22 +30,8 @@ export default function mergeRight (left: FunctorType): Function {
         ])
       }
 
-      case "WeakMap": {
-        return new WeakMap([
-          ...left,
-          ...right,
-        ])
-      }
-
       case "Set": {
         return new Set([
-          ...left,
-          ...right,
-        ])
-      }
-
-      case "WeakSet": {
-        return new WeakSet([
           ...left,
           ...right,
         ])
