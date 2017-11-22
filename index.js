@@ -45,7 +45,8 @@ export default function mergeRight (left: FunctorType): Function {
         throw new Error(`mergeRight doesn't know how to deal with ${type(left)}`)
       }
 
-      case "Stream": {
+      case "Stream":
+      case "MemoryStream": {
         return xstream.merge(right, left)
       }
 
