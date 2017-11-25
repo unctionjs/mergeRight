@@ -38,7 +38,7 @@ export default function mergeRight (left: FunctorType): Function {
       }
 
       case "String": {
-        return `${right}${left}`
+        return `${left}${right}`
       }
 
       case "Buffer": {

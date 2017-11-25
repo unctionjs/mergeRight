@@ -1,11 +1,11 @@
-/* eslint-disable flowtype/require-parameter-type, flowtype/require-return-type, no-magic-numbers */
+/* eslint-disable flowtype/require-parameter-type, flowtype/require-return-type, flowtype/require-variable-type, no-magic-numbers */
 import {test} from "tap"
 import xstream from "xstream"
 import streamSatisfies from "@unction/streamsatisfies"
 
 import mergeRight from "./index"
 
-test(({same, end}) => {
+test("Object", ({same, end}) => {
   const left = {
     alpha: "1",
     beta: "1",
@@ -27,7 +27,7 @@ test(({same, end}) => {
   end()
 })
 
-test(({same, end}) => {
+test("Array", ({same, end}) => {
   const left = [
     "a",
     "b",
@@ -48,19 +48,19 @@ test(({same, end}) => {
   end()
 })
 
-test(({same, end}) => {
+test("String", ({same, end}) => {
   const left = "ab"
   const right = "c"
 
   same(
     mergeRight(left)(right),
-    "cab"
+    "abc"
   )
 
   end()
 })
 
-test(({equal, end}) => {
+test("Stream", ({equal, end}) => {
   const left = xstream.of("a")
   const right = xstream.of("b")
 
@@ -79,7 +79,7 @@ test(({equal, end}) => {
   )
 })
 
-test(({equal, end}) => {
+test("MemoryStream", ({equal, end}) => {
   const left = xstream.of("a").remember()
   const right = xstream.of("b").remember()
 
@@ -98,7 +98,7 @@ test(({equal, end}) => {
   )
 })
 
-test(({same, end}) => {
+test("Map", ({same, end}) => {
   const left = new Map([["a", "1"], ["b", "0"]])
   const right = new Map([["b", "2"], ["c", "3"]])
 
@@ -110,7 +110,7 @@ test(({same, end}) => {
   end()
 })
 
-test(({same, end}) => {
+test("Set", ({same, end}) => {
   const left = new Set(["a", "1", "b", "0"])
   const right = new Set(["b", "2", "c", "3"])
 
