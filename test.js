@@ -7,10 +7,11 @@ import mergeRight from "./index"
 
 test("Object", ({same, end}) => {
   const left = {
-    alpha: "1",
+    alpha: "2",
     beta: "1",
   }
   const right = {
+    alpha: "1",
     beta: "2",
     zeta: "3",
   }
@@ -65,7 +66,7 @@ test("Stream", ({equal, end}) => {
   const right = xstream.of("b")
 
   streamSatisfies(
-    "'b'---'a'---|"
+    "'a'---'b'---|"
   )(
     (given) => (expected) => equal(given, expected)
   )(
@@ -84,7 +85,7 @@ test("MemoryStream", ({equal, end}) => {
   const right = xstream.of("b").remember()
 
   streamSatisfies(
-    "'b'---'a'---|"
+    "'a'---'b'---|"
   )(
     (given) => (expected) => equal(given, expected)
   )(
@@ -136,17 +137,6 @@ test(({throws, end}) => {
 test(({throws, end}) => {
   const left = 1
   const right = 1
-
-  throws(
-    () => mergeRight(left)(right)
-  )
-
-  end()
-})
-
-test(({throws, end}) => {
-  const left = new Buffer("a")
-  const right = new Buffer("a")
 
   throws(
     () => mergeRight(left)(right)
