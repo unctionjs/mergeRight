@@ -1,6 +1,6 @@
 /* eslint-disable flowtype/require-parameter-type, flowtype/require-return-type, flowtype/require-variable-type, no-magic-numbers */
 import {test} from "tap"
-import xstream from "xstream"
+import {of} from "most"
 import streamSatisfies from "@unction/streamsatisfies"
 
 import mergeRight from "./index"
@@ -62,27 +62,8 @@ test("String", ({same, end}) => {
 })
 
 test("Stream", ({equal, end}) => {
-  const left = xstream.of("a")
-  const right = xstream.of("b")
-
-  streamSatisfies(
-    "'a'---'b'---|"
-  )(
-    (given) => (expected) => equal(given, expected)
-  )(
-    ({length}) =>
-      (position) => {
-        equal(length, position)
-        end()
-      }
-  )(
-    mergeRight(left)(right)
-  )
-})
-
-test("MemoryStream", ({equal, end}) => {
-  const left = xstream.of("a").remember()
-  const right = xstream.of("b").remember()
+  const left = of("a")
+  const right = of("b")
 
   streamSatisfies(
     "'a'---'b'---|"

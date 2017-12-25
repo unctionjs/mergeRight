@@ -1,6 +1,6 @@
 /* eslint-disable max-statements */
 import type from "@unction/type"
-import xstream from "xstream"
+import {merge} from "most"
 
 export default function mergeRight (left: FunctorType): UnaryFunctionType {
   return function mergeRightLeft (right: FunctorType): FunctorType {
@@ -42,11 +42,7 @@ export default function mergeRight (left: FunctorType): UnaryFunctionType {
       }
 
       case "Stream": {
-        return xstream.merge(left, right)
-      }
-
-      case "MemoryStream": {
-        return xstream.merge(left, right).remember()
+        return merge(left, right)
       }
 
       default: {
