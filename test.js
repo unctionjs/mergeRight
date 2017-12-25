@@ -5,6 +5,27 @@ import streamSatisfies from "@unction/streamsatisfies"
 
 import mergeRight from "./index"
 
+test("Array", ({same, end}) => {
+  const left = [
+    "a",
+    "b",
+  ]
+  const right = [
+    "c",
+  ]
+
+  same(
+    mergeRight(left)(right),
+    [
+      "a",
+      "b",
+      "c",
+    ]
+  )
+
+  end()
+})
+
 test("Object", ({same, end}) => {
   const left = {
     alpha: "2",
@@ -28,22 +49,25 @@ test("Object", ({same, end}) => {
   end()
 })
 
-test("Array", ({same, end}) => {
-  const left = [
-    "a",
-    "b",
-  ]
-  const right = [
-    "c",
-  ]
+test("Set", ({same, end}) => {
+  const left = new Set(["a", "1", "b", "0"])
+  const right = new Set(["b", "2", "c", "3"])
 
   same(
     mergeRight(left)(right),
-    [
-      "a",
-      "b",
-      "c",
-    ]
+    new Set(["a", "1", "b", "0", "2", "c", "3"])
+  )
+
+  end()
+})
+
+test("Map", ({same, end}) => {
+  const left = new Map([["a", "1"], ["b", "0"]])
+  const right = new Map([["b", "2"], ["c", "3"]])
+
+  same(
+    mergeRight(left)(right),
+    new Map([["a", "1"], ["b", "2"], ["c", "3"]])
   )
 
   end()
@@ -61,7 +85,7 @@ test("String", ({same, end}) => {
   end()
 })
 
-test("Stream", ({equal, end}) => {
+test("Stream", ({equal, doesNotThrow, end}) => {
   const left = of("a")
   const right = of("b")
 
@@ -69,6 +93,8 @@ test("Stream", ({equal, end}) => {
     "'a'---'b'---|"
   )(
     (given) => (expected) => equal(given, expected)
+  )(
+    doesNotThrow
   )(
     ({length}) =>
       (position) => {
@@ -78,30 +104,6 @@ test("Stream", ({equal, end}) => {
   )(
     mergeRight(left)(right)
   )
-})
-
-test("Map", ({same, end}) => {
-  const left = new Map([["a", "1"], ["b", "0"]])
-  const right = new Map([["b", "2"], ["c", "3"]])
-
-  same(
-    mergeRight(left)(right),
-    new Map([["a", "1"], ["b", "2"], ["c", "3"]])
-  )
-
-  end()
-})
-
-test("Set", ({same, end}) => {
-  const left = new Set(["a", "1", "b", "0"])
-  const right = new Set(["b", "2", "c", "3"])
-
-  same(
-    mergeRight(left)(right),
-    new Set(["a", "1", "b", "0", "2", "c", "3"])
-  )
-
-  end()
 })
 
 test(({throws, end}) => {
