@@ -3,7 +3,7 @@ import {test} from "tap";
 import {of} from "most";
 import streamSatisfies from "@unction/streamsatisfies";
 
-import mergeRight from "./index";
+import mergeRight from "./";
 
 test("Array", ({same, end}) => {
   const left = [
