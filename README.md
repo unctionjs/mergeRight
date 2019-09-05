@@ -1,13 +1,12 @@
 # @unction/mergeRight
 
-
 ![Tests][BADGE_TRAVIS]
 ![Stability][BADGE_STABILITY]
 ![Dependencies][BADGE_DEPENDENCY]
 
-> FunctorType => FunctorType => FunctorType
+> EnumerableType<A> => EnumerableType<A> => EnumerableType<A>
 
-Merges two iterables, preferring right.
+Merges two enumerables, preferring right.
 
 ``` javascript
 const left = {
@@ -33,6 +32,5 @@ Which returns:
 ```
 
 [BADGE_TRAVIS]: https://img.shields.io/travis/unctionjs/mergeRight.svg?maxAge=2592000&style=flat-square
-
 [BADGE_STABILITY]: https://img.shields.io/badge/stability-strong-green.svg?maxAge=2592000&style=flat-square
 [BADGE_DEPENDENCY]: https://img.shields.io/david/unctionjs/mergeRight.svg?maxAge=2592000&style=flat-square
