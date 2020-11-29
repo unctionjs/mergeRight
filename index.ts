@@ -1,9 +1,8 @@
 import type from "@unction/type";
 import {merge} from "most";
-import {EnumerableType} from "./types";
 
-export default function mergeRight<A> (left: EnumerableType<A>) {
-  return function mergeRightLeft (right: EnumerableType<A>) {
+export default function mergeRight<A> (left: Array<A> | Set<A> | RecordType<unknown, A> | string) {
+  return function mergeRightLeft (right: Array<A> | Set<A> | RecordType<unknown, A> | string) {
     if (type(left) !== type(right)) {
       throw new Error(`mergeRight received a ${type(left)} and ${type(right)} which aren't the same`);
     }
